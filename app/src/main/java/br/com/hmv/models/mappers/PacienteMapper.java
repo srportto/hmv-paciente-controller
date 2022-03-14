@@ -1,9 +1,11 @@
 package br.com.hmv.models.mappers;
 
 import br.com.hmv.dtos.request.PacienteInsertRequestDTO;
+import br.com.hmv.dtos.responses.PacienteDefaultResponseDTO;
 import br.com.hmv.dtos.responses.PacienteInsertResponseDTO;
 import br.com.hmv.models.entities.Paciente;
 import br.com.hmv.models.enums.CadastroPacienteEnum;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -17,18 +19,25 @@ public abstract class PacienteMapper {
 
     @BeforeMapping
     protected void preparaAntesDeMapearEntityParaDtoInsert(Paciente entity, @MappingTarget PacienteInsertResponseDTO dto) {
-        dto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorCadastroCompleto()));
+        dto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorTipoCadastroRealizado()));
     }
 
     public abstract PacienteInsertResponseDTO deEntityParaDtoInsert(Paciente entity);
 
 
-//    @AfterMapping
-//    protected void ajustaDepoisDeMapearEntityParaDtoDefault(Paciente entity, @MappingTarget PacienteInsertResponseDTO dto) {
-//        dto.getEspecialidades().clear();
-//        var especialidades = entity.getEspecialidades();
-//        especialidades.forEach(especialidadeItem -> dto.getEspecialidades().add(EspecialidadeMapper.INSTANCE.deEspecialidadeParaDto(especialidadeItem)));
+//    @BeforeMapping
+//    protected void preparaAntesDeMapearEntityParaDtoDefault(Paciente entity, @MappingTarget PacienteDefaultResponseDTO dto) {
+//        dto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorTipoCadastroRealizado()));
 //    }
+
+
+    public abstract PacienteDefaultResponseDTO deEntityParaDtoDefault(Paciente entity);
+
+
+    @AfterMapping
+    protected void ajustaDepoisDeMapearEntityParaDtoDefault(Paciente entity, @MappingTarget PacienteDefaultResponseDTO dto) {
+        dto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorTipoCadastroRealizado()));
+    }
 
 
 //    @BeforeMapping

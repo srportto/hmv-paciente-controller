@@ -32,15 +32,26 @@ public class Paciente implements Serializable {
     @Column(name = "primeiro_nome", nullable = false)
     private String primeiroNome;
 
-    @Column(name = "nome_completo", nullable = true)
-    private String nomeCompleto;
-
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
     @EqualsAndHashCode.Include
     @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "senha", nullable = false)
+    private String senha;
+
+    @Column(name = "indicador_tipo_cadastro_realizado", nullable = false, length = 1)
+    private Integer indicadorTipoCadastroRealizado;
+
+
+    @Column(name = "nome_completo", nullable = true)
+    private String nomeCompleto;
+
 
     @Column(name = "nome_completo_mae", nullable = true)
     private String nomeCompletoMae;
@@ -55,14 +66,6 @@ public class Paciente implements Serializable {
     @Embedded
     private Telefone telefone;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-
-    @Column(name = "senha", nullable = false)
-    private String senha;
-
-    @Column(name = "indicador_cadastro_completo", nullable = false, length = 1)
-    private Integer indicadorCadastroCompleto;
 
     @Embedded
     private Convenio convenio;

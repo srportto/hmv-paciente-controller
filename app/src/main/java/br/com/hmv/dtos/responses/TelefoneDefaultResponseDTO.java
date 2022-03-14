@@ -1,6 +1,5 @@
 package br.com.hmv.dtos.responses;
 
-import br.com.hmv.models.entities.Telefone;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,12 +22,4 @@ public class TelefoneDefaultResponseDTO {
 
     @JsonProperty("descricao")
     private String descricao;
-
-    //? construtor diferenciado - de entity para DTO
-    public TelefoneDefaultResponseDTO(Telefone entity) {
-        codigoPais = entity.getCodigoPais();
-        codigoArea = entity.getCodigoArea();
-        numero = entity.getNumero();
-        descricao = entity.getDescricao();
-    }
 }

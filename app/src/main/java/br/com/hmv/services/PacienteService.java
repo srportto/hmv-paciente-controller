@@ -1,7 +1,9 @@
 package br.com.hmv.services;
 
 import br.com.hmv.dtos.request.PacienteInsertRequestDTO;
+import br.com.hmv.dtos.responses.PacienteDefaultResponseDTO;
 import br.com.hmv.dtos.responses.PacienteInsertResponseDTO;
+import br.com.hmv.exceptions.ResourceNotFoundException;
 import br.com.hmv.models.entities.Endereco;
 import br.com.hmv.models.entities.Paciente;
 import br.com.hmv.models.enums.CadastroPacienteEnum;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -153,20 +156,20 @@ public class PacienteService {
 //        logger.info("{} - consulta paginada de recursos por grupo de funcao realizada com sucesso: {}", logCode, list);
 //        return list.map(itemFuncionarioEntity -> FuncionarioMapper.INSTANCE.deEntityParaRespresentacaoEmLista(itemFuncionarioEntity));
 //    }
-//
-//    @Transactional(readOnly = true)
-//    public FuncionarioDefaultResponseDTO findByIdFuncionario(String idFuncionario) {
-//        String logCode = "findByIdFuncionario(String)";
-//        logger.info("{} - buscando recurso pelo id: {}", logCode, idFuncionario);
-//
-//        Optional<Funcionario> obj = funcionarioRepository.findFuncionarioByIdFuncionario(idFuncionario);
-//        Funcionario entity = obj.orElseThrow(() -> new ResourceNotFoundException("recurso nao encontrado id: " + idFuncionario));
-//
-//        logger.info("{} - recurso encontrado: {}", logCode, entity);
-//        return FuncionarioMapper.INSTANCE.deFuncionarioParaDto(entity);
-//    }
-//
-//
+
+    @Transactional(readOnly = true)
+    public PacienteDefaultResponseDTO findByIdPaciente(String idPaciente) {
+        String logCode = "findByIdPaciente(String)";
+        logger.info("{} - buscando recurso pelo id: {}", logCode, idPaciente);
+
+        Optional<Paciente> obj = pacienteRepository.findPacienteByIdPaciente(idPaciente);
+        Paciente entity = obj.orElseThrow(() -> new ResourceNotFoundException("recurso nao encontrado id: " + idPaciente));
+
+        logger.info("{} - recurso encontrado: {}", logCode, entity);
+        return PacienteMapper.INSTANCE.deEntityParaDtoDefault(entity);
+    }
+
+
     private Paciente dtoToEntityOnCreate(PacienteInsertRequestDTO dto) {
         String logCode = "dtoToEntityOnCreate(PacienteInsertRequestDTO)";
         logger.info("{} - convertendo dto de cricao para entity {}", logCode, dto);
@@ -175,7 +178,7 @@ public class PacienteService {
 
         entity.setIdPaciente(UUID.randomUUID().toString());
 
-        entity.setIndicadorCadastroCompleto(CadastroPacienteEnum.SIMPLES.getCodigoStatusCadastroPaciente());
+        entity.setIndicadorTipoCadastroRealizado(CadastroPacienteEnum.SIMPLES.getCodigoStatusCadastroPaciente());
 
         Endereco endereco = new Endereco();
         endereco.setCodigoEndereco(UUID.randomUUID().toString());
@@ -190,7 +193,7 @@ public class PacienteService {
         logger.info("{} - convertendo entity para response default {}", logCode, entity);
 
         var responseDto = PacienteMapper.INSTANCE.deEntityParaDtoInsert(entity);
-        responseDto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorCadastroCompleto()));
+        responseDto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorTipoCadastroRealizado()));
         logger.info("{} - response default montado com sucesso {}", logCode, responseDto);
         return responseDto;
     }

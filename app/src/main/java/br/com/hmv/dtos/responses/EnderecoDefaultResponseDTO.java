@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnderecoDefaultResponseDTO {
+public class EnderecoDefaultResponseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("codigo_endereco")

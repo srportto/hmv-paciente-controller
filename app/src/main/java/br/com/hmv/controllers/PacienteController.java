@@ -1,12 +1,15 @@
 package br.com.hmv.controllers;
 
 import br.com.hmv.dtos.request.PacienteInsertRequestDTO;
+import br.com.hmv.dtos.responses.PacienteDefaultResponseDTO;
 import br.com.hmv.dtos.responses.PacienteInsertResponseDTO;
 import br.com.hmv.services.PacienteService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,8 @@ public class PacienteController {
         logger.info("{} - solicitacao de inclusao concluida com sucesso {}", logCode, responseDTO);
         return ResponseEntity.created(uri).body(responseDTO);
     }
-//
+
+    //
 //
 //    @PatchMapping(value = "/{id}/status")
 //    public ResponseEntity<FuncionarioDefaultResponseDTO> updateStatus(@PathVariable String id, @RequestBody @Valid FuncionarioAtualizaStatusRequestDTO requestDTO) {
@@ -70,16 +74,16 @@ public class PacienteController {
 //        return ResponseEntity.ok().body(responseDtoInList);
 //    }
 //
-//    @GetMapping(value = "/{id}")
-//    public ResponseEntity<FuncionarioDefaultResponseDTO> findById(@PathVariable String id) {
-//        String logCode = "findById(String)";
-//        logger.info("{} - solicitacao de consulta detalhe {}", logCode, id);
-//
-//        FuncionarioDefaultResponseDTO responseDTO = service.findByIdFuncionario(id);
-//
-//        logger.info("{} - solicitacao de consulta detalhe realizada com sucesso {}", logCode, responseDTO);
-//        return ResponseEntity.ok().body(responseDTO);
-//    }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PacienteDefaultResponseDTO> findById(@PathVariable String id) {
+        String logCode = "findById(String)";
+        logger.info("{} - solicitacao de consulta detalhe {}", logCode, id);
+
+        PacienteDefaultResponseDTO responseDTO = service.findByIdPaciente(id);
+
+        logger.info("{} - solicitacao de consulta detalhe realizada com sucesso {}", logCode, responseDTO);
+        return ResponseEntity.ok().body(responseDTO);
+    }
 //
 //    @DeleteMapping(value = "/{id}")
 //    public ResponseEntity<Void> delete(@PathVariable String id) {
