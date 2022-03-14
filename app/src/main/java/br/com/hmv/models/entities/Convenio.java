@@ -21,7 +21,7 @@ public class Convenio {
     private String descricaoConvenio;
 
     @JoinColumn(name = "numero_carteira_convenio", nullable = true)
-    private String numeCarteiraConvenio;
+    private String numeroCarteiraConvenio;
 
     @JoinColumn(name = "data_validade_convenio", nullable = true)
     private LocalDate dataValidadeConvenio;
