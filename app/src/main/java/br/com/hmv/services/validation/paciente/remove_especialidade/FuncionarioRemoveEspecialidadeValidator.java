@@ -1,4 +1,4 @@
-package br.com.hmv.services.validation.funcionario.remove_especialidade;
+package br.com.hmv.services.validation.paciente.remove_especialidade;
 
 import br.com.hmv.dtos.request.FuncionarioRemoveEspecialidadeRequestDTO;
 import br.com.hmv.exceptions.FieldMessage;

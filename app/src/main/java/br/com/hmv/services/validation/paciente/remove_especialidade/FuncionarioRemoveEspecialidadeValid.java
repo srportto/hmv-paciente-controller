@@ -1,4 +1,4 @@
-package br.com.hmv.services.validation.funcionario.remove_especialidade;
+package br.com.hmv.services.validation.paciente.remove_especialidade;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

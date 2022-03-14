@@ -1,6 +1,6 @@
 package br.com.hmv.dtos.request;
 
-import br.com.hmv.services.validation.funcionario.remove_especialidade.FuncionarioRemoveEspecialidadeValid;
+import br.com.hmv.services.validation.paciente.remove_especialidade.FuncionarioRemoveEspecialidadeValid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -20,16 +20,16 @@ import java.io.Serializable;
 @Embeddable
 public class Telefone {
 
-	@JoinColumn(name = "codigo_pais", nullable = false)
-	private Integer codigoPais;
+    @JoinColumn(name = "codigo_pais", nullable = true)
+    private Integer codigoPais;
 
-	@JoinColumn(name = "codigo_area", nullable = false)
-	private Integer codigoArea;
+    @JoinColumn(name = "codigo_area", nullable = true)
+    private Integer codigoArea;
 
-	@JoinColumn(name = "numero", nullable = false)
-	private Integer numero;
+    @JoinColumn(name = "numero", nullable = true)
+    private Integer numero;
 
-	@JoinColumn(name = "descricao")
-	private String descricao;
+    @JoinColumn(name = "descricao", nullable = true)
+    private String descricao;
 
 }

@@ -1,7 +1,5 @@
 package br.com.hmv.dtos.request;
 
-import br.com.hmv.dtos.general.TelefoneDTO;
-import br.com.hmv.services.validation.convenio.criacao.ConvenioInsertValid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @Data
-@ConvenioInsertValid
-public class TelefoneInsertRequestDTO extends TelefoneDTO {
+public class TelefoneInsertRequestDTO {
     @NotNull(message = "Campo codigo_pais deve ser preenchido")
     @JsonProperty("codigo_pais")
     private Integer codigoPais;

@@ -1,7 +1,7 @@
 package br.com.hmv.dtos.request;
 
 import br.com.hmv.models.enums.StatusFuncionarioEnum;
-import br.com.hmv.services.validation.funcionario.atualizacao_status.FuncionarioAtualizaStatusValid;
+import br.com.hmv.services.validation.paciente.atualizacao_status.FuncionarioAtualizaStatusValid;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;

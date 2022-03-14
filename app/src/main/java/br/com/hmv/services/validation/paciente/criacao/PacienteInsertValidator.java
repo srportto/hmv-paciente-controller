@@ -1,6 +1,6 @@
-package br.com.hmv.services.validation.funcionario.atualizacao_status;
+package br.com.hmv.services.validation.paciente.criacao;
 
-import br.com.hmv.dtos.request.FuncionarioAtualizaStatusRequestDTO;
+import br.com.hmv.dtos.request.PacienteInsertRequestDTO;
 import br.com.hmv.exceptions.FieldMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -12,15 +12,15 @@ import java.util.List;
 
 @AllArgsConstructor
 @Log4j2
-public class FuncionarioAtualizaStatusValidator implements ConstraintValidator<FuncionarioAtualizaStatusValid, FuncionarioAtualizaStatusRequestDTO> {
+public class PacienteInsertValidator implements ConstraintValidator<PacienteInsertValid, PacienteInsertRequestDTO> {
 
 
     @Override
-    public void initialize(FuncionarioAtualizaStatusValid ann) {
+    public void initialize(PacienteInsertValid ann) {
     }
 
     @Override
-    public boolean isValid(FuncionarioAtualizaStatusRequestDTO dto, ConstraintValidatorContext context) {
+    public boolean isValid(PacienteInsertRequestDTO dto, ConstraintValidatorContext context) {
 
         List<FieldMessage> list = new ArrayList<>();
 

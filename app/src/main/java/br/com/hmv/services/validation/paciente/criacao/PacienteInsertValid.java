@@ -1,4 +1,4 @@
-package br.com.hmv.services.validation.funcionario.criacao;
+package br.com.hmv.services.validation.paciente.criacao;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,11 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = FuncionarioInsertValidator.class)
+@Constraint(validatedBy = PacienteInsertValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 
-public @interface FuncionarioInsertValid {
+public @interface PacienteInsertValid {
     String message() default "Validation error";
 
     Class<?>[] groups() default {};

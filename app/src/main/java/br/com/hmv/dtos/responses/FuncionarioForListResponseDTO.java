@@ -1,6 +1,5 @@
 package br.com.hmv.dtos.responses;
 
-import br.com.hmv.dtos.general.TelefoneDTO;
 import br.com.hmv.models.enums.GrupoFuncaoFuncionarioEnum;
 import br.com.hmv.models.enums.StatusFuncionarioEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,8 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -52,10 +49,10 @@ public class FuncionarioForListResponseDTO {
 
     @JsonProperty("status")
     private StatusFuncionarioEnum statusFuncionario;
-
-    @JsonIgnore
-    private TelefoneDTO telefone;
-
-    @JsonIgnore
-    private Set<EspecialidadeDTO> especialidades = new HashSet<>();
+//
+//    @JsonIgnore
+//    private TelefoneDTO telefone;
+//
+//    @JsonIgnore
+//    private Set<EspecialidadeDTO> especialidades = new HashSet<>();
 }

@@ -1,51 +1,42 @@
 package br.com.hmv.services;
 
-import br.com.hmv.dtos.request.FuncionarioAddEspecialidadeRequestDTO;
-import br.com.hmv.dtos.request.FuncionarioAtualizaStatusRequestDTO;
-import br.com.hmv.dtos.request.FuncionarioInsertRequestDTO;
-import br.com.hmv.dtos.request.FuncionarioRemoveEspecialidadeRequestDTO;
-import br.com.hmv.dtos.responses.FuncionarioDefaultResponseDTO;
-import br.com.hmv.dtos.responses.FuncionarioForListResponseDTO;
-import br.com.hmv.exceptions.DatabaseException;
-import br.com.hmv.exceptions.ResourceNotFoundException;
-import br.com.hmv.models.entities.Funcionario;
-import br.com.hmv.models.enums.GrupoFuncaoFuncionarioEnum;
-import br.com.hmv.models.enums.StatusFuncionarioEnum;
-import br.com.hmv.models.mappers.FuncionarioMapper;
-import br.com.hmv.repositories.FuncionarioRepository;
+import br.com.hmv.dtos.request.PacienteInsertRequestDTO;
+import br.com.hmv.dtos.responses.PacienteInsertResponseDTO;
+import br.com.hmv.models.entities.Endereco;
+import br.com.hmv.models.entities.Paciente;
+import br.com.hmv.models.enums.CadastroPacienteEnum;
+import br.com.hmv.models.mappers.PacienteMapper;
+import br.com.hmv.repositories.PacienteRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class FuncionarioService {
-    private static Logger logger = LoggerFactory.getLogger(FuncionarioService.class);
-    private FuncionarioRepository funcionarioRepository;
-//    private EspecialidadeRepository especialidadeRepository;
-//
-//    @Transactional
-//    public FuncionarioDefaultResponseDTO criacao(FuncionarioInsertRequestDTO dto) {
-//        String logCode = "criacao(FuncionarioInsertRequestDTO)";
-//        logger.info("{} - solicitacao de inclusao {}", logCode, dto);
-//
-//        var entity = dtoToEntityOnCreate(dto);
-//        entity = funcionarioRepository.save(entity);
-//
-//        logger.info("{} - Convenio incluido com sucesso {}", logCode, entity);
-//        return entityToResponseDefault(entity);
-//    }
-//
+public class PacienteService {
+    private static Logger logger = LoggerFactory.getLogger(PacienteService.class);
+    private PacienteRepository pacienteRepository;
+
+    //    private EspecialidadeRepository especialidadeRepository;
+    //
+
+    @Transactional
+    public PacienteInsertResponseDTO criacao(PacienteInsertRequestDTO dto) {
+        String logCode = "criacao(PacienteInsertRequestDTO)";
+        logger.info("{} - solicitacao de inclusao {}", logCode, dto);
+
+        var entity = dtoToEntityOnCreate(dto);
+        entity = pacienteRepository.save(entity);
+
+        logger.info("{} - Convenio incluido com sucesso {}", logCode, entity);
+        return entityToResponseDtoInsert(entity);
+    }
+
+    //
 //    @Transactional
 //    public FuncionarioDefaultResponseDTO updateStatus(String idFuncionario, FuncionarioAtualizaStatusRequestDTO dto) {
 //        String logCode = "updateStatus(String, FuncionarioAtualizaStatusRequestDTO)";
@@ -176,34 +167,31 @@ public class FuncionarioService {
 //    }
 //
 //
-//    private Funcionario dtoToEntityOnCreate(FuncionarioInsertRequestDTO dto) {
-//        String logCode = "dtoToEntityOnCreate(FuncionarioInsertRequestDTO)";
-//        logger.info("{} - convertendo dto de cricao para entity {}", logCode, dto);
-//
-//        var entity = FuncionarioMapper.INSTANCE.deDtoParaFuncionario(dto);
-//
-//        entity.setIdFuncionario(UUID.randomUUID().toString());
-//        entity.setCodigoGrupoFuncao(dto.getGrupoFuncaoFuncionario().getCodigoGrupoFuncaoFuncionario());
-//        entity.setCodigoStatusFuncionario(StatusFuncionarioEnum.ATIVO.getCodigoStatusFuncionario());
-//
-//        var endereco = entity.getEndereco();
-//        endereco.setCodigoEndereco(UUID.randomUUID().toString());
-//        entity.setEndereco(endereco);
-//        entity.getEspecialidades().clear();
-//
-//        logger.info("{} - conversao realizada com sucesso {}", logCode, entity);
-//        return entity;
-//    }
-//
-//    private FuncionarioDefaultResponseDTO entityToResponseDefault(Funcionario entity) {
-//        String logCode = "entityToResponseDefault(Funcionario)";
-//        logger.info("{} - convertendo entity para response default {}", logCode, entity);
-//
-//        var responseDto = FuncionarioMapper.INSTANCE.deFuncionarioParaDto(entity);
-//        responseDto.setStatusFuncionario(StatusFuncionarioEnum.obterStatusFuncionario(entity.getCodigoStatusFuncionario()));
-//        responseDto.setGrupoFuncaoFuncionario(GrupoFuncaoFuncionarioEnum.obterGrupoFuncaoFuncionario(entity.getCodigoGrupoFuncao()));
-//
-//        logger.info("{} - response default montado com sucesso {}", logCode, responseDto);
-//        return responseDto;
-//    }
+    private Paciente dtoToEntityOnCreate(PacienteInsertRequestDTO dto) {
+        String logCode = "dtoToEntityOnCreate(PacienteInsertRequestDTO)";
+        logger.info("{} - convertendo dto de cricao para entity {}", logCode, dto);
+
+        var entity = PacienteMapper.INSTANCE.deDtoParaEntity(dto);
+
+        entity.setIdPaciente(UUID.randomUUID().toString());
+
+        entity.setIndicadorCadastroCompleto(CadastroPacienteEnum.SIMPLES.getCodigoStatusCadastroPaciente());
+
+        Endereco endereco = new Endereco();
+        endereco.setCodigoEndereco(UUID.randomUUID().toString());
+        entity.setEndereco(endereco);
+
+        logger.info("{} - conversao realizada com sucesso {}", logCode, entity);
+        return entity;
+    }
+
+    private PacienteInsertResponseDTO entityToResponseDtoInsert(Paciente entity) {
+        String logCode = "entityToResponseDefault(Paciente)";
+        logger.info("{} - convertendo entity para response default {}", logCode, entity);
+
+        var responseDto = PacienteMapper.INSTANCE.deEntityParaDtoInsert(entity);
+        responseDto.setIndicadorCadastro(CadastroPacienteEnum.obterStatusCadastroPaciente(entity.getIndicadorCadastroCompleto()));
+        logger.info("{} - response default montado com sucesso {}", logCode, responseDto);
+        return responseDto;
+    }
 }

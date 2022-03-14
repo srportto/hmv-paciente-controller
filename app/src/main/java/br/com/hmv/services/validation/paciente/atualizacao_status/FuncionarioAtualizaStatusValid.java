@@ -1,4 +1,4 @@
-package br.com.hmv.services.validation.funcionario.atualizacao_status;
+package br.com.hmv.services.validation.paciente.atualizacao_status;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

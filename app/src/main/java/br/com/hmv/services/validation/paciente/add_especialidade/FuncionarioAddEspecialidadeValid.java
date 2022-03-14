@@ -1,4 +1,4 @@
-package br.com.hmv.services.validation.funcionario.add_especialidade;
+package br.com.hmv.services.validation.paciente.add_especialidade;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

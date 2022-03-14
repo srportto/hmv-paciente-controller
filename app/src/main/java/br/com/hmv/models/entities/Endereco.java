@@ -33,24 +33,24 @@ public class Endereco implements Serializable {
 	@Column(name="codigo_endereco", nullable = false, unique=true, length = 36)
 	private String codigoEndereco;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String descricao;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String logradouro;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer numero;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String complemento;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String cidade;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String uf;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer cep;
 }
