@@ -13,15 +13,15 @@ import java.time.LocalDate;
 public class ConvenioRequestDTO {
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("codigo_convenio")
+    @JsonProperty("codigo")
     private String codigoConvenio;
 
-    @JsonProperty("descricao_convenio")
+    @JsonProperty("descricao")
     private String descricaoConvenio;
 
-    @JsonProperty("numero_carteira_convenio")
+    @JsonProperty("numero_carteira")
     private String numeroCarteiraConvenio;
 
-    @JsonProperty("data_validade_convenio")
+    @JsonProperty("data_validade")
     private LocalDate dataValidadeConvenio;
 }

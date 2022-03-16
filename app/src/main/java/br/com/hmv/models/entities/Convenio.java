@@ -14,16 +14,16 @@ import java.time.LocalDate;
 @Embeddable
 public class Convenio {
 
-    @JoinColumn(name = "codigo_convenio", nullable = true)
+    @JoinColumn(name = "codigo", nullable = true)
     private String codigoConvenio;
 
-    @JoinColumn(name = "descricao_convenio", nullable = true)
+    @JoinColumn(name = "descricao", nullable = true)
     private String descricaoConvenio;
 
-    @JoinColumn(name = "numero_carteira_convenio", nullable = true)
+    @JoinColumn(name = "numero_carteira", nullable = true)
     private String numeroCarteiraConvenio;
 
-    @JoinColumn(name = "data_validade_convenio", nullable = true)
+    @JoinColumn(name = "data_validade", nullable = true)
     private LocalDate dataValidadeConvenio;
 
 }
